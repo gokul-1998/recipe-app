@@ -1,2 +1,2 @@
 export const AppName = "food mistry";
-export const Api = "http://localhost:8000";
+export const Api = "https://recipe-app-backend-14zs.onrender.com";
