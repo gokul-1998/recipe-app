@@ -1,14 +1,35 @@
 import React from "react";
 import { FaCookieBite } from "react-icons/fa6";
-import { AppName } from "../../Constant";
+import { Api, AppName } from "../../Constant";
 import { SearchField } from "../SearchField";
 import { Button } from "@chakra-ui/react";
 import { RecipeScreen } from "../Layouts/RecipeScreen";
 import { RecipeCard } from "../Layouts/RecipeCard";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export const Home = () => {
   const navigate = useNavigate();
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${Api}/recipes`);
+        const result = await response.json();
+        setData(result);
+        console.log(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div>
       {/* Heading */}
@@ -44,69 +65,22 @@ export const Home = () => {
       {/* List Of Recipe */}
 
       <RecipeScreen>
-        <RecipeCard
-          name={"Dosa"}
-          image={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKRqdNkE2gDSQ5uX9PvKgFKO-hDiuET3Y4X5omycT7IF3tqiCLlnWuv7HfNDoAk44bEB4"
-          }
-          difficulty={"easy"}
-          preparationTime={"30mins"}
-          recipeId="1292"
-        />
-        <RecipeCard
-          name={"Dosa"}
-          image={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKRqdNkE2gDSQ5uX9PvKgFKO-hDiuET3Y4X5omycT7IF3tqiCLlnWuv7HfNDoAk44bEB4"
-          }
-          difficulty={"easy"}
-          preparationTime={"30mins"}
-          recipeId="1292"
-        />
-        <RecipeCard
-          name={"Dosa"}
-          image={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKRqdNkE2gDSQ5uX9PvKgFKO-hDiuET3Y4X5omycT7IF3tqiCLlnWuv7HfNDoAk44bEB4"
-          }
-          difficulty={"easy"}
-          preparationTime={"30mins"}
-          recipeId="1292"
-        />
-        <RecipeCard
-          name={"Dosa"}
-          image={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKRqdNkE2gDSQ5uX9PvKgFKO-hDiuET3Y4X5omycT7IF3tqiCLlnWuv7HfNDoAk44bEB4"
-          }
-          difficulty={"easy"}
-          preparationTime={"30mins"}
-          recipeId="1292"
-        />
-        <RecipeCard
-          name={"Dosa"}
-          image={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKRqdNkE2gDSQ5uX9PvKgFKO-hDiuET3Y4X5omycT7IF3tqiCLlnWuv7HfNDoAk44bEB4"
-          }
-          difficulty={"easy"}
-          preparationTime={"30mins"}
-          recipeId="1292"
-        />
-        <RecipeCard
-          name={"Dosa"}
-          image={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKRqdNkE2gDSQ5uX9PvKgFKO-hDiuET3Y4X5omycT7IF3tqiCLlnWuv7HfNDoAk44bEB4"
-          }
-          difficulty={"easy"}
-          preparationTime={"30mins"}
-          recipeId="1292"
-        />
-        <RecipeCard
-          name={"Dosa"}
-          image={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKRqdNkE2gDSQ5uX9PvKgFKO-hDiuET3Y4X5omycT7IF3tqiCLlnWuv7HfNDoAk44bEB4"
-          }
-          difficulty={"easy"}
-          preparationTime={"30mins"}
-          recipeId="1292"
-        />
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          data?.map((data) => {
+            return (
+              <RecipeCard
+                id={data._id}
+                name={data.name}
+                image={data.thumbnail}
+                difficulty={data.difficulty}
+                preparationTime={data.prepTime}
+                recipeId="1292"
+              />
+            );
+          })
+        )}
       </RecipeScreen>
     </div>
   );

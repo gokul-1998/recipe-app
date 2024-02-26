@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const RecipeCard = ({
@@ -6,19 +8,20 @@ export const RecipeCard = ({
   difficulty,
   preparationTime,
   image,
-  recipeId,
+  id,
 }) => {
   const difficultyColorSchema = {
     hard: "red",
     medium: "orange",
     easy: "green",
   };
-  console.log(difficultyColorSchema[difficulty]);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(`/${recipeId}`);
+    navigate(`/${id}`);
   };
+
+  
 
   return (
     <div

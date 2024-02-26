@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.input{
+    @apply py-3 px-1 focus:bg-slate-50 rounded-sm border outline-none w-full
+}
