@@ -5,7 +5,10 @@ import { SearchField } from "../SearchField";
 import { Button } from "@chakra-ui/react";
 import { RecipeScreen } from "../Layouts/RecipeScreen";
 import { RecipeCard } from "../Layouts/RecipeCard";
+import { useNavigate } from "react-router-dom";
+
 export const Home = () => {
+  const navigate = useNavigate();
   return (
     <div>
       {/* Heading */}
@@ -18,12 +21,23 @@ export const Home = () => {
       <SearchField />
 
       {/* Create button For Creating Recipe */}
-      <div className="w-full py-8 flex justify-center items-center">
+      <div className="w-full  gap-2 px-4 py-8 flex justify-center items-center">
         <Button
-          className=" bg-[#ff9f33] hover:bg-[#f09030]"
+          onClick={() => {
+            navigate("/create-recipe");
+          }}
+          className=" truncate bg-[#ff9f33] hover:bg-[#f09030]"
           colorScheme="#ff9f33"
         >
-          Create Your Recipe
+          Create Your Recipes
+        </Button>
+
+        <Button
+          className="  bg-[#ff9f33] hover:bg-[#f09030] hover:text-white hover:border-black"
+          colorScheme="#ff9f33"
+          variant="outline"
+        >
+          My Recipes
         </Button>
       </div>
 
@@ -93,7 +107,6 @@ export const Home = () => {
           preparationTime={"30mins"}
           recipeId="1292"
         />
-      
       </RecipeScreen>
     </div>
   );

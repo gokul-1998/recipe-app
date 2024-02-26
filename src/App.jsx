@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./components/Home/Home";
 import { IndividualRecipe } from "./components/Recipe/IndividualRecipe";
+import { CreateRecipe } from "./components/Forms/CreateRecipe";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:recipeId" element={<IndividualRecipe />} />
+          <Route path="/create-recipe" element={<CreateRecipe />} />
         </Routes>
       </BrowserRouter>
     </div>
