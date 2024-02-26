@@ -61,3 +61,49 @@ app.post("/recipe", async (req, res) => {
     res.status(501).send(error);
   }
 });
+
+// get all recipes
+app.get("/recipes", async (req, res) => {
+  try {
+    const data = await recipeSchema.find();
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(501).send(error);
+  }
+}
+);
+
+
+// get recipies by name case insensitive, partial match, and return all matching recipes
+app.get("/recipe/:name", async (req, res) => {
+  try {
+    const data = await recipeSchema.find({ name: { $regex: req.params.name, $options: "i" } });
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(501).send(error);
+  }
+}
+);
+
+
+// delete recipe by name
+app.delete("/recipe/:name", async (req, res) => {
+  try {
+    const data = await recipeSchema.deleteOne({ name: req.params.name });
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(501).send(error);
+  }
+}
+);
+
+// get recipe by id
+app.get("/recipe/id/:id", async (req, res) => {
+  try {
+    const data = await recipeSchema.findById(req.params.id);
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(501).send(error);
+  }
+}
+);
