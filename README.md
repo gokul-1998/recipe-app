@@ -1,20 +1,47 @@
 # recipe-app
 
-//client
-navigate to client -> cd recipe-app-client
-install packages -> npm install
-to start ->npm run dev
+# How to run the application
 
-//server
-navigate to client -> cd recipe-app-server
-install packages -> npm install
-to start ->npm start
+- clone the  repository
+- navigate to the project directory
+- install packages -> `npm install`
+- to start the application ->`npm run dev`
 
-# React + Vite
+# Features
+- Create a new recipe
+- View all recipes
+- View a single recipe
+- Delete a recipe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# Technologies
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- EJS
+- tailwindcss
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#  How to contribute
+- Fork the repository
+- Clone the repository
+- Create a feature branch
+- Make changes
+- Commit changes
+- Push to the branch
+- Create a pull request
+
+# Author
+- [Gokulakrishnan](gokulverse.me)
+- [Santhosh]()
+- [Satish]()
+
+# License
+- MIT
+
+
+# Acknowledgement
+- [CyberDude training](https://www.youtube.com/watch?v=9SGDpanrc8U&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7)
+
+
+
