@@ -4,6 +4,7 @@ import { Button } from "@chakra-ui/react";
 import { useRef } from "react";
 import { SignIn, useUser } from "@clerk/clerk-react";
 import { Api } from "../../Constant";
+import {useToast} from "@chakra-ui/react"
 export const CreateRecipe = () => {
   const user = useUser();
   console.log(user.user.primaryEmailAddress.emailAddress);
@@ -37,7 +38,7 @@ export const CreateRecipe = () => {
     ]);
 
     const formRef = useRef();
-
+    const toast = useToast()
     async function handleSubmit(e) {
       const ingredientObject = [];
       e.preventDefault();
@@ -80,9 +81,21 @@ export const CreateRecipe = () => {
           }),
         });
         if (response.ok) {
-          console.log("Recipe added successfully");
+          toast({
+            title: 'Recipe created.',
+            description: "We've created your Recipe.",
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+          })
         } else {
-          console.error("Error adding recipe");
+          toast({
+            title: 'Error.',
+            description: "We've Error try after some times.",
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+          })
         }
       } catch (error) {
         console.error("Error:", error.message);

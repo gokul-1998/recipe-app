@@ -14,6 +14,9 @@ export const Home = () => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(true);
+  const [SearchedValue, setSearchedValue] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,7 +32,30 @@ export const Home = () => {
     };
 
     fetchData();
-  }, []);
+  }, [refresh]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${Api}/recipe/${SearchedValue}`);
+        const result = await response.json();
+        setData(result);
+        if (result.length == 0) {
+          alert("No recipe found with this name");
+          setRefresh(!refresh);
+        }
+        console.log(result);
+      } catch (error) {
+        setRefresh(!refresh);
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [SearchedValue]);
+
   return (
     <div>
       {/* Heading */}
@@ -39,7 +65,10 @@ export const Home = () => {
       </div>
 
       {/* Search Field */}
-      <SearchField />
+      <SearchField
+        setSearchedValue={setSearchedValue}
+        SearchedValue={SearchedValue}
+      />
 
       {/* Create button For Creating Recipe */}
       <div className="w-full  gap-2 px-4 py-8 flex justify-center items-center">
@@ -54,6 +83,9 @@ export const Home = () => {
         </Button>
 
         <Button
+        onClick={()=>{
+          navigate('my-recipe')
+        }}
           className="  bg-[#ff9f33] hover:bg-[#f09030] hover:text-white hover:border-black"
           colorScheme="#ff9f33"
           variant="outline"
