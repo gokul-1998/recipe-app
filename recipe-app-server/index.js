@@ -43,6 +43,7 @@ app.post("/recipe", async (req, res) => {
       nutritionalValues,
       difficulty,
       prepTime,
+      createdBy,
     } = req.body;
     const data = await recipeSchema.create({
       name,
@@ -54,6 +55,7 @@ app.post("/recipe", async (req, res) => {
       nutritionalValues,
       difficulty,
       prepTime,
+      createdBy,
     });
     data.save();
     return res.status(200).send("Recipe Saved Successfully");

@@ -21,6 +21,7 @@ const recipeSchema = new mongoose.Schema({
   difficulty: { type: String },
   prepTime: { type: String },
   createdDate: { type: Date, default: Date.now },
+  createdBy: { type: String ,required:true},
 });
 
 module.exports = mongoose.model("Recipe", recipeSchema);
